@@ -1,7 +1,4 @@
-use std::borrow::BorrowMut;
-
 use crate::{AppState, SET_IMAGE_GRAY};
-use druid::piet::Image;
 use druid::{commands, AppDelegate, Color, Command, DelegateCtx, Env, Handled, ImageBuf, Target};
 
 pub struct Delegate;
@@ -16,13 +13,11 @@ impl AppDelegate<AppState> for Delegate {
         _env: &Env,
     ) -> Handled {
         if let Some(file_info) = cmd.get(commands::OPEN_FILE) {
-            data.gray = false;
             data.buffer = ImageBuf::from_file(file_info.path()).ok();
             return Handled::Yes;
         }
 
         if let Some(_) = cmd.get(SET_IMAGE_GRAY) {
-            data.gray = true;
             if let Some(buffer) = &data.buffer {
                 let pixels: Vec<Color> = buffer.pixel_colors().flatten().collect();
                 // 将RGB三通道改成一通道灰度图

@@ -10,7 +10,6 @@ pub const WINDOW_WIDTH: Vec2 = Vec2 { x: 600.0, y: 400.0 };
 #[derive(Clone, Default, Data, Lens)]
 pub struct AppState {
     pub buffer: Option<ImageBuf>,
-    pub gray: bool,
 }
 
 #[inline]
