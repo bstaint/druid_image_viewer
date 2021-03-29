@@ -2,8 +2,8 @@ use crate::custom_widget::CustomWidget;
 use crate::delegate::Delegate;
 use druid::widget::{Button, Flex};
 use druid::{
-    commands, AppLauncher, Command, FileDialogOptions, FileSpec, Target, Widget, WidgetExt,
-    WindowDesc,
+    commands, AppLauncher, Command, FileDialogOptions, FileSpec, LocalizedString, Target, Widget,
+    WidgetExt, WindowDesc,
 };
 use druid_image_viewer::*;
 
@@ -17,17 +17,25 @@ fn ui_builder() -> impl Widget<AppState> {
     Flex::column()
         .with_child(
             Flex::row()
-                .with_child(Button::new("Open").padding(5.).on_click(move |ctx, _, _| {
-                    ctx.submit_command(Command::new(
-                        commands::SHOW_OPEN_PANEL,
-                        open_dialog_options.clone(),
-                        Target::Auto,
-                    ));
-                }))
+                .with_child(
+                    Button::new(LocalizedString::new("open-button"))
+                        .padding(5.)
+                        .on_click(move |ctx, _, _| {
+                            ctx.submit_command(Command::new(
+                                commands::SHOW_OPEN_PANEL,
+                                open_dialog_options.clone(),
+                                Target::Auto,
+                            ));
+                        }),
+                )
                 .with_flex_spacer(1.0)
-                .with_child(Button::new("Gray").padding(5.).on_click(move |ctx, _, _| {
-                    ctx.submit_command(Command::new(SET_IMAGE_GRAY, (), Target::Auto))
-                }))
+                .with_child(
+                    Button::new(LocalizedString::new("grey-button"))
+                        .padding(5.)
+                        .on_click(move |ctx, _, _| {
+                            ctx.submit_command(Command::new(SET_IMAGE_GRAY, (), Target::Auto))
+                        }),
+                )
                 .fix_height(35.),
         )
         .with_child(CustomWidget {})
