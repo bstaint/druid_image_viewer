@@ -1,5 +1,8 @@
-use druid::piet::{InterpolationMode};
-use druid::{BoxConstraints, Color, Env, Event, EventCtx, LayoutCtx, LifeCycle, LifeCycleCtx, PaintCtx, RenderContext, Size, UpdateCtx, Widget};
+use druid::piet::InterpolationMode;
+use druid::{
+    BoxConstraints, Color, Env, Event, EventCtx, LayoutCtx, LifeCycle, LifeCycleCtx, PaintCtx,
+    RenderContext, Size, UpdateCtx, Widget,
+};
 
 use crate::AppState;
 
@@ -26,7 +29,7 @@ impl Widget<AppState> for CustomWidget {
         let rect = size.to_rect();
         ctx.fill(rect, &Color::WHITE);
 
-        if let Some(image) = data.paint_data.clone() {
+        if let Some(image) = data.buffer.clone() {
             let image = image.to_image(ctx.render_ctx);
             ctx.draw_image(&image, rect, InterpolationMode::NearestNeighbor);
         }
