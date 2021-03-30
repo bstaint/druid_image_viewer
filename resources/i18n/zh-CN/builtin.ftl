@@ -1,4 +1,4 @@
 -app-name = Druid
 
-open-button = ´ò¿ª
-grey-button = »ÒÉ«
+open-button = æ‰“å¼€
+grey-button = ç°è‰²

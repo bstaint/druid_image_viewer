@@ -5,7 +5,7 @@ pub mod custom_widget;
 pub mod delegate;
 
 pub const SET_IMAGE_GRAY: Selector<()> = Selector::new("custom-set-image-gray");
-pub const WINDOW_WIDTH: Vec2 = Vec2 { x: 600.0, y: 400.0 };
+pub const WINDOW_SIZE: Vec2 = Vec2 { x: 600.0, y: 400.0 };
 
 #[derive(Clone, Default, Data, Lens)]
 pub struct AppState {
@@ -15,5 +15,5 @@ pub struct AppState {
 #[inline]
 pub fn screen_center() -> Point {
     let screen_vec = Screen::get_display_rect().center().to_vec2();
-    (screen_vec - (WINDOW_WIDTH * 0.5)).to_point()
+    (screen_vec - (WINDOW_SIZE * 0.5)).to_point()
 }

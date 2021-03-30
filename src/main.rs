@@ -53,7 +53,7 @@ fn ui_builder() -> impl Widget<AppState> {
 
 fn main() {
     let window = WindowDesc::new(ui_builder())
-        .window_size(WINDOW_WIDTH.to_size())
+        .window_size(WINDOW_SIZE.to_size())
         .set_position(screen_center())
         .title("Image Viewer");
 

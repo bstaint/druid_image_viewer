@@ -1,5 +1,6 @@
 use crate::{AppState, SET_IMAGE_GRAY};
-use druid::{commands, AppDelegate, Color, Command, DelegateCtx, Env, Handled, ImageBuf, Target};
+use druid::piet::ImageFormat;
+use druid::{commands, AppDelegate, Command, DelegateCtx, Env, Handled, ImageBuf, Target};
 
 pub struct Delegate;
 
@@ -19,13 +20,16 @@ impl AppDelegate<AppState> for Delegate {
 
         if let Some(_) = cmd.get(SET_IMAGE_GRAY) {
             if let Some(buffer) = &data.buffer {
-                let pixels: Vec<Color> = buffer.pixel_colors().flatten().collect();
                 // 将RGB三通道改成一通道灰度图
-                let pixels: Vec<u8> = pixels.into_iter().map(|c| c.as_rgba8().1).collect();
+                let pixels: Vec<u8> = buffer
+                    .pixel_colors()
+                    .flatten()
+                    .map(|c| c.as_rgba8().1)
+                    .collect();
 
                 data.buffer = Some(ImageBuf::from_raw(
                     pixels,
-                    druid::piet::ImageFormat::Grayscale,
+                    ImageFormat::Grayscale,
                     buffer.width(),
                     buffer.height(),
                 ));
